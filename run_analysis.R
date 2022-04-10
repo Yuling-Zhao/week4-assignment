@@ -4,7 +4,7 @@ library(reshape2)
 #download data
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(url, destfile = "UCI HAR Dataset.zip", method = "curl")
-unzip("UCI HAR Dataset")
+unzip("UCI HAR Dataset.zip")
 
 #read in data
 x_test <- read.table("UCI HAR Dataset/test/X_test.txt") #data contains measurements in test
@@ -35,8 +35,8 @@ train <- cbind(subject_train, activity_train, x_train[,c(mean_std_measurements)]
 names(test) <- c("Subject_ID", "Activity", feature_as_name)
 names(train)<- c("Subject_ID", "Activity", feature_as_name)
 merged_test_train <- rbind(test, train) #merged test and train data set with only mean and standard deviation for each measurement
-write.csv(merged_test_train, file = "merged_test_train.csv")
+write.table(merged_test_train, file = "merged_test_train.txt", row.names = FALSE)
 
-#independent tidy data with the average of each variable for each activity and each subject
+#step 5: independent tidy data with the average of each variable for each activity and each subject
 average <- dcast(merged_test_train, Subject_ID~Activity, mean)
-write.csv(average, file = "averge_variable_each_subject_activity.csv")
+write.table(average, file = "averge_variable_each_subject_activity.txt", row.names = F)
