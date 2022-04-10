@@ -1,0 +1,17 @@
+---
+title: "README"
+output: html_document
+date: '2022-04-10'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+run_analysis code includes codes for downlaoding and unzip the data required. Purpose of each code line is annotated aside the codes.
+
+Briefly, the process is to replace activity lable with descriptive activity name, extract only mean and standard deciation processing of measurements and then merge test data and train data separately with descriptive activity and measurement names. In the end, the test and train data are merged together.
+
+The average processing of all selected variables is based on the merged data, done by dcast() function from reshape2 package.
+
+write.csv() function is called to export tidied data set required (namely "merged_test_train.csv") and an independent tidy data set with the average of each variable for each activity and each subject (namely "average_variable_each_subject_activit.csv")
